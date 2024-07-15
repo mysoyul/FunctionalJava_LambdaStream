@@ -22,6 +22,7 @@ public class StreamBasic {
 
         System.out.println(getGroupingMenu(Dish.menu));
         System.out.println(getMaxCaloryDish(Dish.menu));
+        System.out.println(getMaxCaloryDishIntStream(Dish.menu));
     }
 
     public static List<String> getLowCaloricDishesNamesInJava7(List<Dish> dishes){
@@ -93,8 +94,18 @@ public class StreamBasic {
 //            dish = optionalDish.get();
 //        }
 //        return dish;
-        return optionalDish.orElse(new Dish());
+//        return optionalDish.orElse(new Dish());
+//        return optionalDish.orElseGet(() -> new Dish());
+        return optionalDish.orElseGet(Dish::new);
     }
 
+    public static Integer getMaxCaloryDishIntStream(List<Dish> dishes) {
+        return dishes.stream() //Stream<Dish>
+                //mapToInt(ToIntFunction) ToIntFunction 의 추상메서드 int applyAsInt(T value)
+                .mapToInt(Dish::getCalories) //IntStream
+                .max()  //OptionalInt
+                .orElse(0);
+                //.getAsInt();
+    }
 
 }
