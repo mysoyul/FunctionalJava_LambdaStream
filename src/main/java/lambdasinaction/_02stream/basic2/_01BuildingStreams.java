@@ -12,7 +12,8 @@ public class _01BuildingStreams {
         
         // Stream.of
         Stream<String> stream = Stream.of("Java 8", "Lambdas", "In", "Action");
-        stream.map(String::toUpperCase).forEach(System.out::println);
+        stream.map(String::toUpperCase)
+                .forEach(System.out::println);
 
         // Stream.empty
         Stream<String> emptyStream = Stream.empty();
@@ -66,8 +67,8 @@ public class _01BuildingStreams {
               };
          IntStream.generate(fib).limit(10).forEach(System.out::println);
 
-         long uniqueWords = Files.lines(Paths.get("data.txt"), Charset.defaultCharset())
-                                 .flatMap(line -> Arrays.stream(line.split(" ")))
+         long uniqueWords = Files.lines(Paths.get("data.txt"), Charset.defaultCharset()) //Stream<String>
+                                 .flatMap(line -> Arrays.stream(line.split(" "))) //Stream<String[]>
                                  .distinct()
                                  .count();
 
