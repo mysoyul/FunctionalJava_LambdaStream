@@ -22,16 +22,22 @@ public class FunctionDemo {
 		inventory.add(new Apple(150, "red"));
 
 		// 1. using anonymous inner class
-
-		
+		getColorList(inventory, new Function<Apple, String>() {
+			@Override
+			public String apply(Apple apple) {
+				return apple.getColor();
+			}
+		});
 
 		// 2. lambda expression
-		
+		getColorList(inventory, apple -> apple.getColor());
 
 		// 3. Method Reference
-		// Function<Apple,String> function = Apple :: getColor;
-		
+		Function<Apple, String> colorFunction = Apple::getColor;
+		getColorList(inventory, colorFunction);
 
+		getColorList(inventory, Apple::getColor)
+				.forEach(System.out::println);
 	}
 
 	public static class Apple {
