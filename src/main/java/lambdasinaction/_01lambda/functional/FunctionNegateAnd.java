@@ -18,11 +18,15 @@ public class FunctionNegateAnd {
 		Predicate<Apple> redApple = a -> a.getColor().equals("red");
 		// Predicate 뒤집기
 		Predicate<Apple> notRedApple = redApple.negate();
+
+		Predicate<Apple> notRedApple2 = Predicate.not(a -> a.getColor().equals("red"));
+
 		// red & weight > 150
 		Predicate<Apple> redHeavyApple = redApple.and(a -> a.getWeight() > 150);
 
 		System.out.println(filterApples2(inventory, notRedApple));
 		System.out.println(filterApples2(inventory, redHeavyApple));
+		System.out.println(filterApples2(inventory, redApple.or(a -> a.getWeight() > 150)));
 
 	}
 
