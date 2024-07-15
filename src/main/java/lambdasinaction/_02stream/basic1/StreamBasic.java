@@ -21,6 +21,7 @@ public class StreamBasic {
 
 
         System.out.println(getGroupingMenu(Dish.menu));
+        System.out.println(getMaxCaloryDish(Dish.menu));
     }
 
     public static List<String> getLowCaloricDishesNamesInJava7(List<Dish> dishes){
@@ -87,11 +88,12 @@ public class StreamBasic {
     public static Dish getMaxCaloryDish (List<Dish> dishes) {
         Optional<Dish> optionalDish = dishes.stream()
                 .max(comparingInt(Dish::getCalories));
-        Dish dish = null;
-        if(optionalDish.isPresent()){
-            dish = optionalDish.get();
-        }
-        return dish;
+//        Dish dish = null;
+//        if(optionalDish.isPresent()){
+//            dish = optionalDish.get();
+//        }
+//        return dish;
+        return optionalDish.orElse(new Dish());
     }
 
 
