@@ -24,7 +24,7 @@ public class FilteringApples{
         filterApples(inventory, FilteringApples::isHeavyApple);
 
         // []
-        List<Apple> weirdApples = filterApples(inventory, (Apple a) -> a.getWeight() < 80 ||
+        List<Apple> weirdApples = filterApples(inventory, a -> a.getWeight() < 80 ||
                 "brown".equals(a.getColor()));
         System.out.println(weirdApples);
     }
