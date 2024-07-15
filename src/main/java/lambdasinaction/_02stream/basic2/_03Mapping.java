@@ -10,20 +10,27 @@ public class _03Mapping {
 
     public static void main(String...args){
 
-        //1. map - Dish의 name 목록만
-
-
+        //1. map - Dish의 name 목록만 추출한 List<String>의 forEach() 사용
+        List<String> nameList = menu.stream()  //Stream<Dish>
+                .map(Dish::getName) //Stream<String>
+                .toList();
+        nameList.forEach(System.out::println);
 
         // map
         List<String> words = Arrays.asList("Hello", "World");
         List<Integer> wordLengths = words.stream()
                                          .map(String::length)
-                                         .collect(toList());
+                                         .toList();
         System.out.println(wordLengths);
 
+        //<R> Stream<R> map(Function<? super T,? extends R> mapper)
         //2. map - 중복된 문자 제거한 word 리스트
+        words.stream()
+                .map(word -> Arrays.stream(word.split(""))) //Stream<String[]>
+                .distinct()
+                .forEach(System.out::println);
 
-
+        //<R> Stream<R> flatMap(Function<? super T,? extends Stream<? extends R>> mapper)
         //3.flatMap - 중복된 문자 제거가 word 리스트
 
 
