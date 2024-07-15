@@ -8,13 +8,15 @@ public class _03Sorting {
     public static void main(String...args){
         //Stream의 sorted() 메서드 호출
         List<Integer> integers = Arrays.asList(10, 3, 6, 18, 1, 4);
+
         //1. Anonymous inner class
         integers.stream()
+                //sorted(Comparator)
                 .sorted(new Comparator<Integer>() {
                     @Override
                     public int compare(Integer o1, Integer o2) {
-                        //return o1.compareTo(o2); //asc
-                        return o2.compareTo(o1); //desc
+                        return o1.compareTo(o2); //asc
+                        //return o2.compareTo(o1); //desc
                     }
                 })
                 .forEach(System.out::println);
@@ -22,7 +24,8 @@ public class _03Sorting {
         integers.stream()
                 .sorted((n1,n2) -> n2.compareTo(n1)) //desc
                 .forEach(System.out::println);
-        //3. Method Reference
+
+        //3. Method Reference ( argument instance method reference )
         integers.stream()
                 .sorted(Integer::compareTo) //asc
                 .forEach(System.out::println);
@@ -43,9 +46,12 @@ public class _03Sorting {
         
         // 2. 구현 anonymous inner class 
         // [Apple{color='green', weight=30}, Apple{color='green', weight=80}, Apple{color='green', weight=155}]
-        
-        
-        
+        inventory.sort(new Comparator<Apple>() {
+            @Override
+            public int compare(Apple o1, Apple o2) {
+                return o1.getWeight().compareTo(o2.getWeight());
+            }
+        });
         System.out.println(inventory);
 
         // reshuffling things a little
@@ -53,15 +59,17 @@ public class _03Sorting {
         
         // 3. 구현 lambda 
         // [Apple{color='red', weight=20}, Apple{color='green', weight=30}, Apple{color='green', weight=155}]
+        inventory.sort((a1,a2) -> a1.getWeight().compareTo(a2.getWeight()));
+        System.out.println(inventory);
 
-        
         // reshuffling things a little
         inventory.set(1, new Apple(10, "red"));
         
         // 4. 구현 Method Reference
         // [Apple{color='red', weight=10}, Apple{color='red', weight=20}, Apple{color='green', weight=155}]
-
-    
+        //inventory.sort(comparing(apple -> apple.getWeight()));
+        inventory.sort(comparing(Apple::getWeight));
+        System.out.println(inventory);
     }
 
     public static class Apple {
