@@ -26,15 +26,25 @@ public class _03Mapping {
         //<R> Stream<R> map(Function<? super T,? extends R> mapper)
         //2. map - 중복된 문자 제거한 word 리스트
         words.stream()
-                .map(word -> Arrays.stream(word.split(""))) //Stream<String[]>
+                .map(word -> word.split("")) //Stream<String[]>
                 .distinct()
                 .forEach(System.out::println);
 
         //<R> Stream<R> flatMap(Function<? super T,? extends Stream<? extends R>> mapper)
         //3.flatMap - 중복된 문자 제거가 word 리스트
+        System.out.println("map() 과 flatMap() 호출");
+        words.stream()
+                .map(word -> word.split(""))
+                //.flatMap(strArr -> Arrays.stream(strArr))
+                .flatMap(Arrays::stream)
+                .distinct()
+                .forEach(System.out::println);
 
-
-
+        System.out.println("flatMap() 만 호출");
+        words.stream()
+                .flatMap(word -> Arrays.stream(word.split("")))
+                .distinct()
+                .forEach(System.out::println);
 
         // flatMap
         List<Integer> numbers1 = Arrays.asList(1,2,3,4,5);
@@ -45,7 +55,7 @@ public class _03Mapping {
                                                        .map((Integer j) -> new int[]{i, j})
                                  )
                                 .filter(pair -> (pair[0] + pair[1]) % 3 == 0)
-                                .collect(toList());
+                                .toList();
         pairs.forEach(pair -> System.out.println("(" + pair[0] + ", " + pair[1] + ")"));
     }
 }
