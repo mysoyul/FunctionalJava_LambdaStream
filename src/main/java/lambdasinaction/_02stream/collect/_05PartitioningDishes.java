@@ -24,12 +24,16 @@ public class _05PartitioningDishes {
 
     //2. 채식요리와 채식요리가 아닌 것으로 분류한 다음 type별로 그룹핑 하기
     private static Map<Boolean, Map<Dish.Type, List<Dish>>> vegetarianDishesByType() {
-        return null;
+        return menu.stream()
+                .collect(partitioningBy(
+                            DishFunctions.getIsVegetarian(),
+                            groupingBy(DishFunctions.getDishTypeFunction())
+                        ));
     }
 
     //3. 채식요리와 채식요리가 아닌 것으로 분류한 다음
     // 채식요리 중 칼로리 가장 높은 Dish, 채식요리가 아닌 것 중 칼로리 가장 높은 Dish
-    private static Object mostCaloricPartitionedByVegetarian() {
+    private static Map<Boolean,Dish> mostCaloricPartitionedByVegetarian() {
         return null;
     }
 }
