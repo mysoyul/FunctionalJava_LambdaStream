@@ -2,7 +2,7 @@ package lambdasinaction._02stream.collect;
 
 import java.util.*;
 
-import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.*;
 
 public class _01GroupingTransactions {
 
@@ -42,8 +42,27 @@ public class _01GroupingTransactions {
 
     //Java8 groupingBy 사용
     private static void groupFunctionally() {
-
-
+        //Currency별로 Transaction을 그룹핑하기
+        Map<Currency, List<Transaction>> currencyListMap = transactions.stream()
+                //collect(Collector) Collector를 반환하는 Collectors.groupingBy(Function)
+                .collect(groupingBy(Transaction::getCurrency));
+        System.out.println("currencyListMap = " + currencyListMap);
+        
+        //Currency별로 Transaction을 그룹핑하고 value의 합계 구하기
+        Map<Currency, Double> currencyDoubleMap = transactions.stream()
+                .collect(groupingBy(
+                        Transaction::getCurrency,
+                        summingDouble(Transaction::getValue)
+                ));
+        System.out.println("currencyDoubleMap = " + currencyDoubleMap);
+        //Currency별로 Transaction을 그룹핑하고 value >= 5000 True / False 로 분류하기
+        Map<Currency, Map<Boolean, List<Transaction>>> greater5000Map = 
+                transactions.stream()
+                .collect(groupingBy(
+                        Transaction::getCurrency,
+                        partitioningBy(tx -> tx.getValue() >= 5000)
+                ));
+        System.out.println("greater5000Map = " + greater5000Map);
 
     }
 
