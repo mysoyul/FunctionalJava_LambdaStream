@@ -72,7 +72,7 @@ public class _02Summarizing {
 
         return menu.stream()
                 .map(Dish::getName)
-                .collect(joining(""));
+                .collect(joining(" "));
     }
 
     private static String getShortMenuCommaSeparated() {
