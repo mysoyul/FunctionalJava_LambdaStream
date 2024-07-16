@@ -25,7 +25,8 @@ public class MobileTesterWithOptional {
 		System.out.println(displayFeatures.getSize());
 
 		//orElseThrow(Supplier X) X extends Throwable
-		
+		displayFeaturesOptional.orElseThrow(() -> new RuntimeException("DisplayFeatures Not Found"));
+		System.out.println(displayFeatures.getSize());
 	}
 
 }
