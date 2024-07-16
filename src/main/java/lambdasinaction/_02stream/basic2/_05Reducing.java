@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 
 import lambdasinaction._02stream.basic1.Dish;
+
 import static lambdasinaction._02stream.basic1.Dish.menu;
 import static java.util.stream.Collectors.summarizingInt;
 import static java.util.stream.Collectors.summingInt;
@@ -59,7 +60,6 @@ public class _05Reducing {
                 .reduce(Integer::min) //Optional<Integer>
                 .orElse(0);
         System.out.println("min = " + min);
-
 
         Optional<Integer> optional = numbers.stream().reduce(Integer::min);
         optional.ifPresent(System.out::println);
